@@ -1,45 +1,39 @@
-import { Send, MapPin } from 'lucide-react';
-
 export default function Footer() {
   return (
-    <footer className="bg-primary-dark text-white pt-12 pb-6 px-6">
-      <div className="container mx-auto grid md:grid-cols-3 gap-12 border-b border-gray-700 pb-12">
+    <footer className="bg-gray-900 text-gray-300 mt-10">
+
+      <div className="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
         <div>
-          <h3 className="font-bold mb-4">Contact Info</h3>
-          <p className="flex items-start gap-2 text-sm text-gray-400 leading-relaxed">
-            <MapPin size={18} className="shrink-0 mt-1" />
-            Vilegnagna, Addis Ababa, Ethiopia
+          <h2 className="text-white font-bold mb-3">Ahadu Computer</h2>
+          <p className="text-sm">
+            Premium computer trading platform in Ethiopia.
           </p>
         </div>
-        
+
         <div>
-          <h3 className="font-bold mb-4">Links</h3>
-          <ul className="text-sm text-gray-400 space-y-2">
-            <li><a href="#" className="hover:text-white">Products</a></li>
-            <li><a href="#" className="hover:text-white">Comments</a></li>
-            <li><a href="#" className="hover:text-white">Contact</a></li>
+          <h3 className="text-white mb-2">Links</h3>
+          <ul className="space-y-1 text-sm">
+            <li>Products</li>
+            <li>Services</li>
+            <li>Contact</li>
           </ul>
         </div>
 
         <div>
-          <h3 className="font-bold mb-4">Newsletter</h3>
-          <div className="flex bg-white/10 rounded overflow-hidden">
-            <input 
-              type="email" 
-              placeholder="Signup..." 
-              className="bg-transparent px-4 py-2 text-sm focus:outline-none flex-grow"
-            />
-            <button className="bg-blue-600 px-4 flex items-center justify-center hover:bg-blue-700">
-              <Send size={16} />
-            </button>
-          </div>
+          <h3 className="text-white mb-2">Newsletter</h3>
+          <input className="w-full p-2 rounded text-black text-sm" />
+          <button className="mt-2 bg-blue-600 px-4 py-2 rounded w-full text-sm">
+            Subscribe
+          </button>
         </div>
+
       </div>
-      
-      <div className="container mx-auto mt-6 flex flex-col md:flex-row justify-between items-center text-[10px] text-gray-500">
-        <p>© 2026 Ahadu Computer Trading. All rights reserved.</p>
-        <p>አሃዱ ኮምፒውተር ትሬዲንግ</p>
+
+      <div className="text-center p-4 border-t border-gray-700 text-xs">
+        © 2026 Ahadu Computer Trading
       </div>
+
     </footer>
-  );
+  )
 }
