@@ -23,11 +23,18 @@ const Navbar = () => {
     <nav className="bg-white border-b border-border sticky top-0 z-40 h-[70px] flex items-center">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="flex justify-between items-center">
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-1">
-            <span className="text-primary font-extrabold text-2xl tracking-tighter">AHADU</span>
-            <span className="text-gold font-extrabold text-2xl tracking-tighter">.COMPUTERS</span>
-          </Link>
+           {/* Logo */}
+          <Link to="/" className="flex items-center gap-2">
+  <img src="/src/assets/logo.svg" alt="Ahadu Logo" className="h-26 w-auto" />
+  <div className="flex flex-col">
+    <span className="text-primary font-extrabold text-lg leading-none tracking-tighter">
+      AHADU
+    </span>
+    <span className="text-slate-400 font-bold text-[10px] leading-none tracking-widest uppercase">
+      Computer Trading
+    </span>
+  </div>
+</Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
