@@ -34,8 +34,8 @@ const Contact = () => {
                   </div>
                   <div>
                     <p className="text-blue-200 text-xs font-bold uppercase tracking-widest mb-1">Call Us</p>
-                    <p className="text-lg font-bold">+251 911 234 567</p>
-                    <p className="text-lg font-bold">+251 116 678 901</p>
+                    <p className="text-lg font-bold">+251 905 027 162</p>
+                    <p className="text-lg font-bold">+251 984 249 649</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">

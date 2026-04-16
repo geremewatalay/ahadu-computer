@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { ArrowRight, Shield, Zap, Headphones } from 'lucide-react';
+import { ArrowRight, Shield, Zap, Headphones,} from 'lucide-react';
 
 const Hero = () => {
   return (
@@ -16,7 +16,7 @@ const Hero = () => {
               transition={{ duration: 0.6 }}
             >
               <span className="inline-block px-3 py-1 bg-blue-100 text-accent rounded-full text-[10px] font-bold tracking-widest uppercase mb-6">
-                New Arrival • 2024 Models
+                New Arrival • 2026 Models
               </span>
               <h1 className="text-4xl lg:text-6xl font-extrabold text-primary leading-[1.1] mb-6">
                 Elevating Technology <br />
@@ -72,8 +72,8 @@ const Hero = () => {
           >
             <div className="relative rounded-2xl overflow-hidden shadow-sm border border-border bg-white p-4">
               <img
-                src="https://picsum.photos/seed/ahadu-minimal/800/600"
-                alt="Ahadu Computer Trading"
+                src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&q=80&w=800&h=600"
+                alt="High-end Laptop"
                 className="w-full h-full object-cover rounded-lg"
                 referrerPolicy="no-referrer"
               />

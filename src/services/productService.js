@@ -6,7 +6,7 @@ const MOCK_PRODUCTS = [
     description: 'High-performance laptop with InfinityEdge display. Perfect for professionals and creators.',
     price: 85000,
     category: 'Laptops',
-    image: 'https://picsum.photos/seed/laptop1/600/400',
+    image: 'https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&q=80&w=600&h=400',
     stock: 10,
     specs: {
       processor: 'Intel Core i7',
@@ -21,7 +21,7 @@ const MOCK_PRODUCTS = [
     description: 'Apple M2 Pro chip for next-level performance. Stunning Liquid Retina XDR display.',
     price: 125000,
     category: 'Laptops',
-    image: 'https://picsum.photos/seed/laptop2/600/400',
+    image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&q=80&w=600&h=400',
     stock: 5,
     specs: {
       processor: 'Apple M2 Pro',
@@ -36,7 +36,7 @@ const MOCK_PRODUCTS = [
     description: 'Powerful desktop for home and office. Reliable performance for everyday tasks.',
     price: 45000,
     category: 'Desktops',
-    image: 'https://picsum.photos/seed/desktop1/600/400',
+    image: 'https://images.unsplash.com/photo-1587831990711-23ca6441447b?auto=format&fit=crop&q=80&w=600&h=400',
     stock: 15,
     specs: {
       processor: 'Intel Core i5',
@@ -51,7 +51,7 @@ const MOCK_PRODUCTS = [
     description: 'Advanced wireless mouse for precision and comfort. Silent clicks and 8K DPI tracking.',
     price: 6500,
     category: 'Accessories',
-    image: 'https://picsum.photos/seed/mouse1/600/400',
+    image: 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?auto=format&fit=crop&q=80&w=600&h=400',
     stock: 30,
     specs: {
       type: 'Wireless Mouse',
@@ -66,7 +66,7 @@ const MOCK_PRODUCTS = [
     description: 'Curved gaming monitor with 144Hz refresh rate. Immersive gaming experience.',
     price: 22000,
     category: 'Monitors',
-    image: 'https://picsum.photos/seed/monitor1/600/400',
+    image: 'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&q=80&w=600&h=400',
     stock: 8,
     specs: {
       size: '27"',
@@ -81,7 +81,7 @@ const MOCK_PRODUCTS = [
     description: 'Gaming laptop with NVIDIA GeForce RTX 4060. High-speed performance for gamers.',
     price: 95000,
     category: 'Laptops',
-    image: 'https://picsum.photos/seed/laptop3/600/400',
+    image: 'https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&q=80&w=600&h=400',
     stock: 4,
     specs: {
       processor: 'Intel Core i9',

@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Target, Eye, Heart, Users } from 'lucide-react';
+import { Target, Eye, Heart, Users, Shield } from 'lucide-react';
 
 const About = () => {
   return (
@@ -28,7 +28,7 @@ const About = () => {
             <div className="flex-1 relative">
               <div className="rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white rotate-3">
                 <img 
-                  src="https://picsum.photos/seed/ahadu-about/800/600" 
+                  src="https://images.unsplash.com/photo-1522071823991-b99c223030ad?auto=format&fit=crop&q=80&w=800&h=600" 
                   alt="Ahadu Team" 
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
