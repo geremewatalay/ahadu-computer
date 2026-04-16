@@ -24,18 +24,21 @@ const ProductGrid = () => {
   }, []);
 
   return (
-    <section className="py-24 bg-white">
+    <section className="py-24 bg-bg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-end mb-12">
+        <div className="flex justify-between items-end mb-16">
           <div>
-            <h2 className="text-3xl md:text-4xl font-black text-blue-900 mb-4 uppercase tracking-tight">Featured Products</h2>
-            <p className="text-gray-600">Our hand-picked selection of top-performing hardware.</p>
+            <div className="flex items-center gap-2 mb-2">
+              <span className="w-8 h-[2px] bg-accent" />
+              <span className="text-accent font-black text-[10px] uppercase tracking-[0.2em]">Curated Selection</span>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-black text-primary uppercase tracking-tighter">Featured Hardware</h2>
           </div>
           <Link 
             to="/products" 
-            className="hidden md:flex items-center gap-2 text-blue-900 font-bold hover:gap-3 transition-all"
+            className="hidden md:flex items-center gap-3 text-primary font-black text-xs uppercase tracking-widest hover:text-accent transition-all group"
           >
-            View All Products <ArrowRight size={20} />
+            View Full Catalog <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Wrench, Shield, Zap, Headphones, Settings, Cpu } from 'lucide-react';
 import { motion } from 'motion/react';
 
@@ -50,13 +49,17 @@ const Services = () => {
       className="bg-white min-h-screen"
     >
       {/* Hero Section */}
-      <section className="bg-blue-900 py-24 text-white text-center relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
+      <section className="bg-primary py-32 text-white text-center relative overflow-hidden">
+        <div className="absolute inset-0 opacity-5">
           <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:40px_40px]"></div>
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <h1 className="text-4xl md:text-6xl font-black mb-6 uppercase tracking-tight">Professional IT Services</h1>
-          <p className="text-xl text-blue-200 max-w-2xl mx-auto">
+          <div className="flex items-center justify-center gap-2 mb-6">
+            <span className="w-8 h-[2px] bg-accent" />
+            <span className="text-accent font-black text-[10px] uppercase tracking-[0.2em]">Technical Excellence</span>
+          </div>
+          <h1 className="text-5xl md:text-8xl font-black mb-8 uppercase tracking-tighter">Professional <br /> IT Services</h1>
+          <p className="text-xl text-white/60 max-w-2xl mx-auto font-medium">
             Beyond retail, we provide world-class technical support and repair services to keep your technology running smoothly.
           </p>
         </div>
@@ -72,13 +75,13 @@ const Services = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="group p-10 rounded-[2.5rem] border border-gray-100 hover:border-blue-100 hover:shadow-2xl transition-all duration-500"
+              className="group p-12 rounded-[3rem] border border-border hover:border-primary/20 hover:shadow-ethio transition-all duration-500 bg-white"
             >
-              <div className={`w-16 h-16 ${service.color} rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-current/10`}>
-                <service.icon size={32} />
+              <div className={`w-20 h-20 ${service.color} rounded-[1.5rem] flex items-center justify-center mb-10 group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-current/10`}>
+                <service.icon size={36} />
               </div>
-              <h3 className="text-2xl font-black text-blue-900 mb-4">{service.title}</h3>
-              <p className="text-gray-600 leading-relaxed">
+              <h3 className="text-2xl font-black text-primary mb-4 uppercase tracking-tight">{service.title}</h3>
+              <p className="text-slate-500 leading-relaxed font-medium">
                 {service.description}
               </p>
             </motion.div>
@@ -87,23 +90,24 @@ const Services = () => {
       </section>
 
       {/* Booking CTA */}
-      <section className="py-24 bg-gray-50">
+      <section className="py-24 bg-bg">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="bg-white rounded-[3rem] p-12 md:p-20 shadow-xl border border-gray-100">
-            <h2 className="text-3xl md:text-4xl font-black text-blue-900 mb-6 uppercase tracking-tight">Need a Repair?</h2>
-            <p className="text-gray-600 text-lg mb-10 max-w-2xl mx-auto">
+          <div className="bg-white rounded-[4rem] p-12 md:p-24 shadow-ethio border border-border relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full -translate-y-1/2 translate-x-1/2" />
+            <h2 className="text-4xl md:text-6xl font-black text-primary mb-8 uppercase tracking-tighter">Need a Repair?</h2>
+            <p className="text-slate-500 text-xl mb-12 max-w-2xl mx-auto font-medium">
               Bring your device to our service center or schedule a consultation. Our technicians will diagnose the issue and provide a transparent quote.
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
               <a 
                 href="tel:+251911234567" 
-                className="w-full sm:w-auto bg-blue-900 text-white px-10 py-4 rounded-xl font-bold text-lg hover:bg-blue-800 transition-all shadow-lg"
+                className="w-full sm:w-auto bg-primary text-white px-12 py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-primary/90 transition-all shadow-lg"
               >
                 Call Us Now
               </a>
               <Link 
                 to="/contact" 
-                className="w-full sm:w-auto bg-amber-500 text-white px-10 py-4 rounded-xl font-bold text-lg hover:bg-amber-600 transition-all shadow-lg"
+                className="w-full sm:w-auto bg-accent text-primary px-12 py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:scale-105 transition-all shadow-lg"
               >
                 Book a Service
               </Link>

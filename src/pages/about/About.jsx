@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Target, Eye, Heart, Users, Shield } from 'lucide-react';
+import { Target, Eye, Heart, Users, Shield} from 'lucide-react';
 
 const About = () => {
   return (
@@ -14,19 +14,19 @@ const About = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex flex-col lg:flex-row items-center gap-16">
             <div className="flex-1">
-              <span className="text-amber-600 font-black uppercase tracking-widest text-sm mb-4 block">Our Story</span>
-              <h1 className="text-4xl md:text-6xl font-black text-blue-900 mb-8 leading-tight uppercase tracking-tight">
-                Leading the Tech <br /> Revolution in Ethiopia
+              <span className="text-accent font-black uppercase tracking-[0.3em] text-[10px] mb-4 block">Our Story</span>
+              <h1 className="text-5xl md:text-7xl font-black text-primary mb-8 leading-[1.05] uppercase tracking-tighter">
+                Leading the Tech <br /> Revolution
               </h1>
-              <p className="text-xl text-gray-600 leading-relaxed mb-8">
+              <p className="text-xl text-slate-600 leading-relaxed mb-8 font-medium">
                 Founded in 2010, Ahadu Computer Trading has grown from a small repair shop to Ethiopia's most trusted computer retail and service provider.
               </p>
-              <p className="text-gray-500 leading-relaxed">
+              <p className="text-slate-400 leading-relaxed text-sm">
                 Our journey began with a simple mission: to make high-quality technology accessible to everyone in Ethiopia. Today, we serve thousands of individuals and businesses, providing them with the tools they need to succeed in a digital world.
               </p>
             </div>
             <div className="flex-1 relative">
-              <div className="rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white rotate-3">
+              <div className="rounded-[4rem] overflow-hidden shadow-ethio border-8 border-white rotate-3 group hover:rotate-0 transition-transform duration-700">
                 <img 
                   src="https://images.unsplash.com/photo-1522071823991-b99c223030ad?auto=format&fit=crop&q=80&w=800&h=600" 
                   alt="Ahadu Team" 
@@ -34,9 +34,9 @@ const About = () => {
                   referrerPolicy="no-referrer"
                 />
               </div>
-              <div className="absolute -bottom-10 -left-10 bg-blue-900 text-white p-8 rounded-3xl shadow-2xl">
-                <p className="text-4xl font-black mb-1">15+</p>
-                <p className="text-xs font-bold uppercase tracking-widest text-blue-200">Years of Excellence</p>
+              <div className="absolute -bottom-10 -left-10 bg-primary text-white p-10 rounded-[2.5rem] shadow-2xl border border-white/10">
+                <p className="text-5xl font-black mb-1 text-accent">15+</p>
+                <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/60">Years of Excellence</p>
               </div>
             </div>
           </div>

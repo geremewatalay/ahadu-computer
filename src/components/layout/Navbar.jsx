@@ -20,31 +20,30 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-white border-b border-border sticky top-0 z-40 h-[70px] flex items-center">
+    <nav className="bg-white/80 backdrop-blur-md border-b border-border sticky top-0 z-40 h-[80px] flex items-center">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="flex justify-between items-center">
-           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2">
-  <img src="/src/assets/logo.svg" alt="Ahadu Logo" className="h-26 w-auto" />
-  <div className="flex flex-col">
-    <span className="text-primary font-extrabold text-lg leading-none tracking-tighter">
-      AHADU
-    </span>
-    <span className="text-slate-400 font-bold text-[10px] leading-none tracking-widest uppercase">
-      Computer Trading
-    </span>
-  </div>
-</Link>
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-3 group">
+            <div className="bg-primary p-2 rounded-xl group-hover:rotate-6 transition-transform">
+              <img src="/src/assets/logo.svg" alt="Ahadu Icon" className="h-6 w-6 invert" />
+            </div>
+            <div className="flex flex-col">
+              <span className="text-primary font-black text-xl leading-none tracking-tighter">AHADU</span>
+              <span className="text-accent font-black text-[9px] leading-none tracking-[0.2em] uppercase">Computer Trading</span>
+            </div>
+          </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-10">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 to={link.path}
-                className="text-text hover:text-accent font-medium text-sm transition-colors"
+                className="text-primary/60 hover:text-primary font-bold text-xs uppercase tracking-widest transition-colors relative group"
               >
                 {link.name}
+                <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-accent group-hover:w-full transition-all duration-300" />
               </Link>
             ))}
           </div>
@@ -62,6 +61,13 @@ const Navbar = () => {
             
             {user ? (
               <div className="flex items-center gap-4">
+                <Link 
+                  to="/profile" 
+                  className="text-text hover:text-accent transition-colors"
+                  title="Profile"
+                >
+                  <User size={20} />
+                </Link>
                 {isAdmin && (
                   <Link 
                     to="/admin" 
@@ -138,6 +144,14 @@ const Navbar = () => {
               <div className="pt-4 border-t border-gray-100 mt-4 flex flex-col gap-3">
                 {user ? (
                   <>
+                    <Link 
+                      to="/profile" 
+                      onClick={() => setIsMenuOpen(false)}
+                      className="flex items-center gap-2 px-3 py-3 text-gray-700 font-bold"
+                    >
+                      <User size={20} />
+                      My Profile
+                    </Link>
                     {isAdmin && (
                       <Link 
                         to="/admin" 

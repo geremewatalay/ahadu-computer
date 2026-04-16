@@ -13,11 +13,11 @@ const Categories = () => {
   ];
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-20 bg-white border-y border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-black text-blue-900 mb-4 uppercase tracking-tight">Browse by Category</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-extrabold text-primary mb-4 uppercase tracking-widest">Featured Categories</h2>
+          <p className="text-slate-500 max-w-2xl mx-auto text-sm">
             Find exactly what you need from our wide range of high-quality computer products and components.
           </p>
         </div>
@@ -27,13 +27,15 @@ const Categories = () => {
             <Link
               key={cat.name}
               to={`/products?category=${cat.name}`}
-              className="group bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 text-center flex flex-col items-center border border-transparent hover:border-blue-100"
+              className="group bg-white p-8 rounded-[2rem] border border-border hover:border-primary/20 hover:shadow-ethio transition-all duration-500 text-center flex flex-col items-center"
             >
-              <div className={`w-16 h-16 ${cat.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                <cat.icon size={32} />
+              <div className="w-16 h-16 bg-bg text-primary rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-sm">
+                <cat.icon size={28} />
               </div>
-              <h3 className="font-bold text-blue-900 mb-1">{cat.name}</h3>
-              <p className="text-xs text-gray-400 font-semibold uppercase tracking-widest">{cat.count} Items</p>
+              <h3 className="font-black text-primary text-sm mb-2 uppercase tracking-tight">{cat.name}</h3>
+              <div className="px-3 py-1 bg-accent/10 rounded-full">
+                <p className="text-[9px] text-accent font-black uppercase tracking-widest">{cat.count} Items</p>
+              </div>
             </Link>
           ))}
         </div>
