@@ -7,6 +7,7 @@ import { productService } from '../../services/productService';
 import Loader from '../../components/ui/Loader';
 import { motion, AnimatePresence } from 'motion/react';
 
+
 const Products = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const categoryParam = searchParams.get('category') || 'All';

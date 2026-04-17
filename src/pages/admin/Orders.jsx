@@ -1,17 +1,46 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Search, Filter, Eye, Download, MoreVertical } from 'lucide-react';
 import { formatPrice } from '../../utils/formatPrice';
 import { motion } from 'motion/react';
+import { orderService } from '../../services/orderService';
+import Loader from '../../components/ui/Loader';
 
 const Orders = () => {
-  const orders = [
-    { id: '#ORD-7829', customer: 'Abebe Kebede', date: '2024-03-15', total: 85000, status: 'Delivered', items: 1 },
-    { id: '#ORD-7830', customer: 'Sara Tesfaye', date: '2024-03-15', total: 6500, status: 'Processing', items: 2 },
-    { id: '#ORD-7831', customer: 'Dawit Mengistu', date: '2024-03-14', total: 125000, status: 'Shipped', items: 1 },
-    { id: '#ORD-7832', customer: 'Helen Alemu', date: '2024-03-14', total: 22000, status: 'Pending', items: 1 },
-    { id: '#ORD-7833', customer: 'Yonas Tadesse', date: '2024-03-13', total: 45000, status: 'Delivered', items: 1 },
-    { id: '#ORD-7834', customer: 'Marta Bekele', date: '2024-03-13', total: 95000, status: 'Cancelled', items: 1 },
-  ];
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchOrders();
+  }, []);
+
+  const fetchOrders = async () => {
+    setLoading(true);
+    try {
+      const data = await orderService.getAllOrders();
+      setOrders(data);
+    } catch (error) {
+      console.error('Error fetching orders:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleStatusUpdate = async (orderId, newStatus) => {
+    try {
+      await orderService.updateOrderStatus(orderId, newStatus);
+      fetchOrders();
+    } catch (error) {
+      alert('Failed to update status: ' + error.message);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="p-12 h-full flex items-center justify-center">
+        <Loader size="lg" />
+      </div>
+    );
+  }
 
   return (
     <motion.div
@@ -68,41 +97,49 @@ const Orders = () => {
                 <th className="px-10 py-6 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-border">
-              {orders.map((order) => (
-                <tr key={order.id} className="hover:bg-bg/50 transition-colors group">
-                  <td className="px-10 py-8 font-black text-[11px] text-primary group-hover:text-accent transition-colors">{order.id}</td>
-                  <td className="px-10 py-8 text-primary font-bold text-xs">{order.customer}</td>
-                  <td className="px-10 py-8 text-slate-400 font-bold text-[10px] uppercase tracking-widest">{order.date}</td>
-                  <td className="px-10 py-8 text-slate-400 font-black text-[10px] uppercase tracking-widest">{order.items} Units</td>
-                  <td className="px-10 py-8 font-black text-primary text-sm">{formatPrice(order.total)}</td>
-                  <td className="px-10 py-8">
-                    <span className={`px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-[0.15em] border
-                      ${order.status === 'Delivered' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : 
-                        order.status === 'Processing' ? 'bg-primary/5 text-primary border-primary/10' :
-                        order.status === 'Shipped' ? 'bg-secondary/10 text-secondary border-secondary/20' :
-                        order.status === 'Cancelled' ? 'bg-red-50 text-red-600 border-red-100' :
-                        'bg-accent/10 text-primary border-accent/20'}
-                    `}>
-                      {order.status}
-                    </span>
-                  </td>
-                  <td className="px-10 py-8 text-right">
-                    <div className="flex justify-end gap-3">
-                      <button className="w-10 h-10 flex items-center justify-center bg-bg text-primary hover:bg-primary hover:text-white rounded-xl transition-all border border-border group/btn">
-                        <Eye size={16} />
-                      </button>
-                      <button className="w-10 h-10 flex items-center justify-center bg-bg text-slate-400 hover:bg-white hover:shadow-md rounded-xl transition-all border border-border group/btn">
-                        <Download size={16} />
-                      </button>
-                      <button className="w-10 h-10 flex items-center justify-center bg-bg text-slate-400 hover:bg-white hover:shadow-md rounded-xl transition-all border border-border group/btn">
-                        <MoreVertical size={16} />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
+              <tbody className="divide-y divide-border">
+                {orders.map((order) => {
+                  const displayId = `#ORD-${order.id.substring(0, 4).toUpperCase()}`;
+                  const customerName = order.profiles?.full_name || order.customer || 'Unknown';
+                  const date = new Date(order.created_at).toLocaleDateString();
+
+                  return (
+                    <tr key={order.id} className="hover:bg-bg/50 transition-colors group">
+                      <td className="px-10 py-8 font-black text-[11px] text-primary group-hover:text-accent transition-colors">{displayId}</td>
+                      <td className="px-10 py-8 text-primary font-bold text-xs">{customerName}</td>
+                      <td className="px-10 py-8 text-slate-400 font-bold text-[10px] uppercase tracking-widest">{date}</td>
+                      <td className="px-10 py-8 text-slate-400 font-black text-[10px] uppercase tracking-widest">{order.items} Units</td>
+                      <td className="px-10 py-8 font-black text-primary text-sm">{formatPrice(order.total)}</td>
+                      <td className="px-10 py-8">
+                        <select 
+                          value={order.status}
+                          onChange={(e) => handleStatusUpdate(order.id, e.target.value)}
+                          className={`px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-[0.15em] border outline-none cursor-pointer appearance-none
+                            ${order.status === 'Delivered' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : 
+                              order.status === 'Processing' ? 'bg-primary/5 text-primary border-primary/10' :
+                              order.status === 'Shipped' ? 'bg-secondary/10 text-secondary border-secondary/20' :
+                              order.status === 'Cancelled' ? 'bg-red-50 text-red-600 border-red-100' :
+                              'bg-accent/10 text-primary border-accent/20'}
+                          `}
+                        >
+                          <option value="Pending">Pending</option>
+                          <option value="Processing">Processing</option>
+                          <option value="Shipped">Shipped</option>
+                          <option value="Delivered">Delivered</option>
+                          <option value="Cancelled">Cancelled</option>
+                        </select>
+                      </td>
+                      <td className="px-10 py-8 text-right">
+                        <div className="flex justify-end gap-3">
+                          <button className="w-10 h-10 flex items-center justify-center bg-bg text-primary hover:bg-primary hover:text-white rounded-xl transition-all border border-border group/btn">
+                            <Eye size={16} />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
           </table>
         </div>
       </div>

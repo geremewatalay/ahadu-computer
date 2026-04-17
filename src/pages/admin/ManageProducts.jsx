@@ -11,6 +11,7 @@ const ManageProducts = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingId, setEditingId] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
   const [formData, setFormData] = useState({
     name: '',
@@ -19,6 +20,8 @@ const ManageProducts = () => {
     stock: '',
     description: ''
   });
+
+  const [selectedFile, setSelectedFile] = useState(null);
 
   useEffect(() => {
     fetchProducts();
@@ -39,6 +42,7 @@ const ManageProducts = () => {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
+      setSelectedFile(file);
       const reader = new FileReader();
       reader.onloadend = () => {
         setPreviewImage(reader.result);
@@ -49,20 +53,66 @@ const ManageProducts = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // In a real app, this would handle FormData and image upload
+    setLoading(true);
     try {
-      await productService.createProduct({
+      let imageUrl = previewImage;
+      
+      if (selectedFile) {
+        imageUrl = await productService.uploadProductImage(selectedFile);
+      }
+
+      const payload = {
         ...formData,
         price: parseFloat(formData.price),
         stock: parseInt(formData.stock),
-        image: previewImage || 'https://picsum.photos/seed/new/600/400'
-      });
-      setIsModalOpen(false);
+        image: imageUrl || 'https://picsum.photos/seed/new/600/400'
+      };
+
+      if (editingId) {
+        await productService.updateProduct(editingId, payload);
+      } else {
+        await productService.createProduct(payload);
+      }
+
+      handleCloseModal();
       fetchProducts();
-      setFormData({ name: '', category: 'Laptops', price: '', stock: '', description: '' });
-      setPreviewImage(null);
     } catch (error) {
-      alert('Error creating product');
+      console.error('Error:', error);
+      alert('Error saving product: ' + error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleEdit = (product) => {
+    setEditingId(product.id);
+    setFormData({
+      name: product.name,
+      category: product.category,
+      price: product.price.toString(),
+      stock: product.stock.toString(),
+      description: product.description || ''
+    });
+    setPreviewImage(product.image);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setEditingId(null);
+    setFormData({ name: '', category: 'Laptops', price: '', stock: '', description: '' });
+    setPreviewImage(null);
+    setSelectedFile(null);
+  };
+
+  const handleDelete = async (id) => {
+    if (window.confirm('Terminate this product entity?')) {
+      try {
+        await productService.deleteProduct(id);
+        fetchProducts();
+      } catch (error) {
+        alert('Delete failed: ' + error.message);
+      }
     }
   };
 
@@ -149,10 +199,16 @@ const ManageProducts = () => {
                     </td>
                     <td className="px-10 py-8 text-right">
                       <div className="flex justify-end gap-3">
-                        <button className="w-10 h-10 flex items-center justify-center bg-bg text-primary hover:bg-primary hover:text-white rounded-xl transition-all border border-border group/btn">
+                        <button 
+                          onClick={() => handleEdit(product)}
+                          className="w-10 h-10 flex items-center justify-center bg-bg text-primary hover:bg-primary hover:text-white rounded-xl transition-all border border-border group/btn"
+                        >
                           <Edit2 size={16} className="group-hover/btn:scale-110 transition-transform" />
                         </button>
-                        <button className="w-10 h-10 flex items-center justify-center bg-bg text-red-500 hover:bg-red-500 hover:text-white rounded-xl transition-all border border-border group/btn">
+                        <button 
+                          onClick={() => handleDelete(product.id)}
+                          className="w-10 h-10 flex items-center justify-center bg-bg text-red-500 hover:bg-red-500 hover:text-white rounded-xl transition-all border border-border group/btn"
+                        >
                           <Trash2 size={16} className="group-hover/btn:rotate-12 transition-transform" />
                         </button>
                       </div>
@@ -186,10 +242,14 @@ const ManageProducts = () => {
               <div className="p-12 md:p-16 relative z-10">
                 <div className="flex justify-between items-center mb-12">
                   <div>
-                    <span className="text-accent font-black text-[9px] uppercase tracking-[0.25em] mb-2 block">New Transmission</span>
-                    <h2 className="text-3xl font-black text-primary uppercase tracking-tighter leading-none">Initialize Entity</h2>
+                    <span className="text-accent font-black text-[9px] uppercase tracking-[0.25em] mb-2 block">
+                      {editingId ? 'Modify Transmission' : 'New Transmission'}
+                    </span>
+                    <h2 className="text-3xl font-black text-primary uppercase tracking-tighter leading-none">
+                      {editingId ? 'Edit Entity' : 'Initialize Entity'}
+                    </h2>
                   </div>
-                  <button onClick={() => setIsModalOpen(false)} className="w-12 h-12 flex items-center justify-center bg-bg rounded-2xl text-slate-400 hover:text-primary hover:bg-white hover:shadow-md transition-all">
+                  <button onClick={handleCloseModal} className="w-12 h-12 flex items-center justify-center bg-bg rounded-2xl text-slate-400 hover:text-primary hover:bg-white hover:shadow-md transition-all">
                     <X size={24} />
                   </button>
                 </div>
@@ -280,7 +340,7 @@ const ManageProducts = () => {
                   </div>
 
                   <Button type="submit" size="lg" className="w-full mt-6 shadow-2xl">
-                    Finalize Entry Protocol
+                    {editingId ? 'Save Changes Protocol' : 'Finalize Entry Protocol'}
                   </Button>
                 </form>
               </div>

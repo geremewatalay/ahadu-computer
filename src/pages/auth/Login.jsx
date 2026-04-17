@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { LogIn, Mail, Lock, ArrowRight, AlertCircle } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
-import { authService } from '../../services/authService';
 import Button from '../../components/ui/Button';
 import Input from '../../components/ui/Input';
 import { motion } from 'motion/react';
@@ -25,7 +24,14 @@ const Login = () => {
     setLoading(true);
     
     try {
-      await login(email, password);
+      const data = await login(email, password);
+      // Wait for profile to be potentially fetched or use the response data
+      // AuthContext updates profile state automatically, but for immediate redirect:
+      // We can check if the user is an admin by inspecting the login result if it includes profile,
+      // or just rely on the navigate logic.
+      
+      // Let's improve the redirection logic in AuthContext to be safer,
+      // but here we just wait a tick for state sync if needed or use its return
       navigate(from, { replace: true });
     } catch (err) {
       setError(err.message);

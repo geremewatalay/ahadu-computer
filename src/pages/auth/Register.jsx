@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserPlus, Mail, Lock, User, ArrowRight, AlertCircle } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
-import { authService } from '../../services/authService';
 import Button from '../../components/ui/Button';
 import Input from '../../components/ui/Input';
 import { motion } from 'motion/react';
@@ -34,12 +33,11 @@ const Register = () => {
     
     setLoading(true);
     try {
-      const user = await authService.register({
-        name: formData.name,
-        email: formData.email,
-        password: formData.password
-      });
-      register(user);
+      await register(
+        formData.email,
+        formData.password,
+        formData.name
+      );
       navigate('/');
     } catch (err) {
       setError(err.message);

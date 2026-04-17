@@ -64,37 +64,80 @@ export const AuthProvider = ({ children }) => {
   };
 
   const login = async (email, password) => {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-    if (error) throw error;
-    return data;
+    const cleanEmail = String(email || '').trim();
+    const cleanPassword = String(password || '');
+
+    console.log('🔐 System Auth: Initiating Login Protocol...', { email: cleanEmail });
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: cleanEmail,
+        password: cleanPassword,
+      });
+      if (error) throw error;
+      return data;
+    } catch (error) {
+      console.error('❌ Auth Error:', error.message);
+      throw error;
+    }
   };
 
   const logout = async () => {
+    console.log('🔐 System Auth: Terminating Session...');
     const { error } = await supabase.auth.signOut();
     if (error) throw error;
   };
 
   const register = async (email, password, fullName) => {
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
+    const cleanEmail = String(email || '').trim();
+    const cleanPassword = String(password || '');
+    const cleanFullName = String(fullName || '').trim();
+
+    console.log('🔐 System Auth: Registering New Stakeholder...', { 
+      email: cleanEmail, 
+      fullName: cleanFullName 
     });
 
-    if (error) throw error;
-
-    if (data.user) {
-      // Create profile entry
-      const { error: profileError } = await supabase
-        .from('profiles')
-        .insert([{ id: data.user.id, full_name: fullName, role: 'customer' }]);
-      
-      if (profileError) console.error('Error creating profile:', profileError.message);
+    if (cleanPassword.length < 6) {
+      throw new Error('Password must be at least 6 characters long for security.');
     }
 
-    return data;
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email: cleanEmail,
+        password: cleanPassword,
+        options: {
+          data: {
+            full_name: cleanFullName,
+          }
+        }
+      });
+
+      if (error) throw error;
+
+      if (data.user) {
+        console.log('✅ System Auth: Identity created. Syncing profile...');
+        // Create profile entry in the public.profiles table
+        const { error: profileError } = await supabase
+          .from('profiles')
+          .insert([{ 
+            id: data.user.id, 
+            full_name: cleanFullName, 
+            email: cleanEmail,
+            role: 'customer' 
+          }]);
+        
+        if (profileError) {
+          console.warn('⚠️ System Auth: Profile sync delayed (Check RLS):', profileError.message);
+        } else {
+          console.log('✅ System Auth: Profile synchronized successfully.');
+        }
+      }
+
+      return data;
+    } catch (error) {
+      console.error('❌ Registration Error:', error.message);
+      throw error;
+    }
   };
 
   const updateProfile = async (updates) => {
@@ -114,12 +157,13 @@ export const AuthProvider = ({ children }) => {
   };
 
   const updateUser = async (data) => {
+    console.log('🔐 System Auth: Updating Identity Protocol...');
     try {
       const { error } = await supabase.auth.updateUser(data);
       if (error) throw error;
       return { success: true };
     } catch (error) {
-      console.error('Error updating auth user:', error.message);
+      console.error('❌ User Update Error:', error.message);
       return { success: false, error: error.message };
     }
   };
