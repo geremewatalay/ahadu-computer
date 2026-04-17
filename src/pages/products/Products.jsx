@@ -6,6 +6,7 @@ import ProductSearch from '../../components/products/ProductSearch';
 import { productService } from '../../services/productService';
 import Loader from '../../components/ui/Loader';
 import { motion, AnimatePresence } from 'motion/react';
+import { Search } from "lucide-react";
 
 
 const Products = () => {

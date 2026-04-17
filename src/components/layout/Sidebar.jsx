@@ -15,14 +15,12 @@ const Sidebar = () => {
   const location = useLocation();
 
   const menuItems = [
-    { name: 'Dashboard', icon: LayoutDashboard, path: '/admin' },
+    { name: 'Dashboard', icon: LayoutDashboard, path: '/admin/dashboard' },
     { name: 'Products', icon: Package, path: '/admin/products' },
     { name: 'Orders', icon: ShoppingBag, path: '/admin/orders' },
-    { name: 'Customers', icon: Users, path: '/admin/customers' },
   ];
 
   const secondaryItems = [
-    { name: 'Settings', icon: Settings, path: '/admin/settings' },
     { name: 'Back to Site', icon: Home, path: '/' },
   ];
 

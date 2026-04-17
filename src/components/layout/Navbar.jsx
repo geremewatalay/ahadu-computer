@@ -70,7 +70,7 @@ const Navbar = () => {
                 </Link>
                 {isAdmin && (
                   <Link 
-                    to="/admin" 
+                    to="/admin/dashboard" 
                     className="text-primary font-semibold hover:text-accent text-sm transition-all"
                   >
                     Admin
@@ -154,7 +154,7 @@ const Navbar = () => {
                     </Link>
                     {isAdmin && (
                       <Link 
-                        to="/admin" 
+                        to="/admin/dashboard" 
                         onClick={() => setIsMenuOpen(false)}
                         className="flex items-center gap-2 px-3 py-3 text-blue-900 font-bold"
                       >

@@ -55,6 +55,21 @@ export const AuthProvider = ({ children }) => {
         .single();
 
       if (error) throw error;
+      
+      // AUTO-PROMOTION: If email matches admin but role is customer, upgrade them
+      const ADMIN_EMAIL = 'merchanttradingplc@gmail.com';
+      if (data.email.toLowerCase() === ADMIN_EMAIL.toLowerCase() && data.role !== 'admin') {
+        console.log('🛡️ System Auth: Auto-promoting Master Admin...');
+        const { error: updateError } = await supabase
+          .from('profiles')
+          .update({ role: 'admin' })
+          .eq('id', userId);
+        
+        if (!updateError) {
+          data.role = 'admin';
+        }
+      }
+
       setProfile(data);
     } catch (error) {
       console.error('Error fetching profile:', error.message);
@@ -73,7 +88,15 @@ export const AuthProvider = ({ children }) => {
         email: cleanEmail,
         password: cleanPassword,
       });
-      if (error) throw error;
+      if (error) {
+        if (error.message.includes('Email not confirmed')) {
+          throw new Error('Access Denied: Please verify your email address to continue. Check your inbox for the confirmation link.');
+        }
+        if (error.message.includes('Invalid login credentials')) {
+          throw new Error('Verification Failed: The email or password provided is incorrect.');
+        }
+        throw error;
+      }
       return data;
     } catch (error) {
       console.error('❌ Auth Error:', error.message);
@@ -116,6 +139,11 @@ export const AuthProvider = ({ children }) => {
 
       if (data.user) {
         console.log('✅ System Auth: Identity created. Syncing profile...');
+        
+        // ADMIN BOOTSTRAP: Automatically grant admin role to the primary stakeholder email
+        const ADMIN_EMAIL = 'merchanttradingplc@gmail.com';
+        const assignedRole = cleanEmail.toLowerCase() === ADMIN_EMAIL.toLowerCase() ? 'admin' : 'customer';
+
         // Create profile entry in the public.profiles table
         const { error: profileError } = await supabase
           .from('profiles')
@@ -123,7 +151,7 @@ export const AuthProvider = ({ children }) => {
             id: data.user.id, 
             full_name: cleanFullName, 
             email: cleanEmail,
-            role: 'customer' 
+            role: assignedRole 
           }]);
         
         if (profileError) {
@@ -168,7 +196,14 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // Identity calculation
   const isAdmin = profile?.role === 'admin';
+
+  console.log('🛡️ System Auth: Current Security Signal:', { 
+    authenticated: !!user, 
+    role: profile?.role || 'anonymous',
+    isAdmin 
+  });
 
   return (
     <AuthContext.Provider value={{ 

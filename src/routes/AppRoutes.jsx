@@ -16,6 +16,7 @@ import Support from '../pages/support/Support';
 import Contact from '../pages/contact/Contact';
 import Login from '../pages/auth/Login';
 import Register from '../pages/auth/Register';
+import Profile from '../pages/auth/Profile';
 import Cart from '../pages/cart/Cart';
 import Dashboard from '../pages/admin/Dashboard';
 import ManageProducts from '../pages/admin/ManageProducts';
@@ -27,6 +28,7 @@ import ProtectedRoute from './ProtectedRoute';
 
 export const AppRoutes = createRoutesFromElements(
   <>
+    {/* PUBLIC + USER ROUTES */}
     <Route path="/" element={<MainLayout />}>
       <Route index element={<Home />} />
       <Route path="products" element={<Products />} />
@@ -37,16 +39,37 @@ export const AppRoutes = createRoutesFromElements(
       <Route path="support" element={<Support />} />
       <Route path="contact" element={<Contact />} />
       <Route path="cart" element={<Cart />} />
+
+      {/* USER PROFILE PROTECTED */}
+      <Route
+        path="profile"
+        element={
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+        }
+      />
     </Route>
-    
-    <Route path="/admin" element={<AdminLayout />}>
+
+    {/* 🔐 ADMIN ROUTES (FIXED) */}
+    <Route
+      path="/admin"
+      element={
+        <ProtectedRoute adminOnly={true}>
+          <AdminLayout />
+        </ProtectedRoute>
+      }
+    >
       <Route index element={<Dashboard />} />
       <Route path="products" element={<ManageProducts />} />
       <Route path="orders" element={<Orders />} />
     </Route>
-    
+
+    {/* AUTH */}
     <Route path="/login" element={<Login />} />
     <Route path="/register" element={<Register />} />
+
+    {/* 404 */}
     <Route path="*" element={<NotFound />} />
   </>
 );
