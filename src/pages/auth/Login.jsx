@@ -25,8 +25,7 @@ const Login = () => {
     setLoading(true);
     
     try {
-      const user = await authService.login(email, password);
-      login(user);
+      await login(email, password);
       navigate(from, { replace: true });
     } catch (err) {
       setError(err.message);
@@ -115,15 +114,6 @@ const Login = () => {
                 </Link>
               </p>
             </div>
-          </div>
-          
-          <div className="bg-primary p-8 text-center border-t-4 border-accent">
-            <p className="text-accent underline text-[10px] font-black uppercase tracking-[0.2em] mb-1">
-              Demo Admin Credentials
-            </p>
-            <p className="text-white/60 text-[10px] font-black uppercase tracking-[0.2em]">
-              admin@ahadu.com / admin123
-            </p>
           </div>
         </div>
       </motion.div>
