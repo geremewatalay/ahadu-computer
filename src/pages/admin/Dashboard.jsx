@@ -31,64 +31,68 @@ const Dashboard = () => {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="p-8"
+      className="p-12 bg-bg min-h-full"
     >
-      <div className="mb-10">
-        <h1 className="text-3xl font-black text-blue-900 uppercase tracking-tight">Dashboard Overview</h1>
-        <p className="text-gray-500 font-medium">Welcome back, Admin. Here's what's happening today.</p>
+      <div className="mb-16">
+        <div className="flex items-center gap-3 mb-4">
+          <span className="w-8 h-[2px] bg-accent" />
+          <span className="text-accent font-black text-[10px] uppercase tracking-[0.2em]">Operational Overview</span>
+        </div>
+        <h1 className="text-5xl font-black text-primary uppercase tracking-tighter leading-none">System Matrix</h1>
+        <p className="text-slate-400 font-bold text-[10px] uppercase tracking-widest mt-4">Real-time engagement and telemetry data summary.</p>
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-16">
         {stats.map((stat) => (
-          <div key={stat.name} className="bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100">
-            <div className="flex justify-between items-start mb-6">
-              <div className={`w-14 h-14 ${stat.bg} ${stat.color} rounded-2xl flex items-center justify-center`}>
-                <stat.icon size={28} />
+          <div key={stat.name} className="bg-white p-10 rounded-[3rem] shadow-ethio border border-border group hover:-translate-y-2 transition-transform duration-500">
+            <div className="flex justify-between items-start mb-10">
+              <div className={`w-14 h-14 bg-bg rounded-2xl flex items-center justify-center border border-border group-hover:bg-primary transition-colors`}>
+                <stat.icon size={24} className="text-primary group-hover:text-white" />
               </div>
-              <div className={`flex items-center gap-1 text-sm font-bold ${stat.up ? 'text-emerald-600' : 'text-red-600'}`}>
-                {stat.trend} {stat.up ? <ArrowUpRight size={16} /> : <ArrowDownRight size={16} />}
+              <div className={`flex items-center gap-1 text-[10px] font-black uppercase tracking-widest ${stat.up ? 'text-emerald-600' : 'text-red-600'}`}>
+                {stat.trend} {stat.up ? <ArrowUpRight size={14} /> : <ArrowDownRight size={14} />}
               </div>
             </div>
-            <p className="text-gray-400 text-xs font-bold uppercase tracking-widest mb-1">{stat.name}</p>
-            <h3 className="text-2xl font-black text-blue-900">
+            <p className="text-slate-400 text-[9px] font-black uppercase tracking-[0.2em] mb-2 leading-none">{stat.name}</p>
+            <h3 className="text-3xl font-black text-primary tracking-tighter leading-none">
               {stat.name.includes('Revenue') ? formatPrice(stat.value) : stat.value.toLocaleString()}
             </h3>
           </div>
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
         {/* Recent Orders Table */}
-        <div className="lg:col-span-2 bg-white rounded-[2.5rem] shadow-sm border border-gray-100 overflow-hidden">
-          <div className="p-8 border-b border-gray-50 flex justify-between items-center">
-            <h3 className="text-xl font-black text-blue-900 uppercase tracking-tight">Recent Orders</h3>
-            <button className="text-blue-900 font-bold text-sm hover:underline">View All</button>
+        <div className="lg:col-span-2 bg-white rounded-[4rem] shadow-ethio border border-border overflow-hidden">
+          <div className="p-10 border-b border-border flex justify-between items-center">
+            <h3 className="text-xl font-black text-primary uppercase tracking-tight">Recent Acquisitions</h3>
+            <button className="text-accent font-black text-[10px] uppercase tracking-[0.2em] hover:text-primary transition-colors">Expand Full Log &rarr;</button>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-left">
               <thead>
-                <tr className="bg-gray-50 text-gray-400 text-[10px] font-black uppercase tracking-[0.2em]">
-                  <th className="px-8 py-4">Order ID</th>
-                  <th className="px-8 py-4">Customer</th>
-                  <th className="px-8 py-4">Date</th>
-                  <th className="px-8 py-4">Total</th>
-                  <th className="px-8 py-4">Status</th>
+                <tr className="bg-bg text-slate-400 text-[9px] font-black uppercase tracking-[0.2em]">
+                  <th className="px-10 py-6">Reference ID</th>
+                  <th className="px-10 py-6">Stakeholder</th>
+                  <th className="px-10 py-6">Timestamp</th>
+                  <th className="px-10 py-6">Amount</th>
+                  <th className="px-10 py-6">State</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-50">
+              <tbody className="divide-y divide-border">
                 {recentOrders.map((order) => (
-                  <tr key={order.id} className="hover:bg-gray-50 transition-colors">
-                    <td className="px-8 py-5 font-bold text-blue-900">{order.id}</td>
-                    <td className="px-8 py-5 text-gray-600 font-medium">{order.customer}</td>
-                    <td className="px-8 py-5 text-gray-500 text-sm">{order.date}</td>
-                    <td className="px-8 py-5 font-bold text-blue-900">{formatPrice(order.total)}</td>
-                    <td className="px-8 py-5">
-                      <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest
-                        ${order.status === 'Delivered' ? 'bg-emerald-50 text-emerald-600' : 
-                          order.status === 'Processing' ? 'bg-blue-50 text-blue-600' :
-                          order.status === 'Shipped' ? 'bg-purple-50 text-purple-600' :
-                          'bg-amber-50 text-amber-600'}
+                  <tr key={order.id} className="hover:bg-bg/50 transition-colors group">
+                    <td className="px-10 py-6 font-black text-[11px] text-primary group-hover:text-accent transition-colors">{order.id}</td>
+                    <td className="px-10 py-6 text-primary font-bold text-xs">{order.customer}</td>
+                    <td className="px-10 py-6 text-slate-400 font-bold text-[10px] uppercase tracking-widest">{order.date}</td>
+                    <td className="px-10 py-6 font-black text-primary text-sm">{formatPrice(order.total)}</td>
+                    <td className="px-10 py-6">
+                      <span className={`px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-[0.15em] border
+                        ${order.status === 'Delivered' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : 
+                          order.status === 'Processing' ? 'bg-primary/5 text-primary border-primary/10' :
+                          order.status === 'Shipped' ? 'bg-secondary/10 text-secondary border-secondary/20' :
+                          'bg-accent/10 text-primary border-accent/20'}
                       `}>
                         {order.status}
                       </span>
@@ -101,28 +105,28 @@ const Dashboard = () => {
         </div>
 
         {/* Quick Actions / Activity */}
-        <div className="bg-white rounded-[2.5rem] shadow-sm border border-gray-100 p-8">
-          <h3 className="text-xl font-black text-blue-900 uppercase tracking-tight mb-8">Recent Activity</h3>
-          <div className="space-y-8">
+        <div className="bg-white rounded-[4rem] shadow-ethio border border-border p-10 flex flex-col">
+          <h3 className="text-xl font-black text-primary uppercase tracking-tight mb-10">System Relay</h3>
+          <div className="space-y-10 flex-1">
             {[
-              { text: 'New product added: MacBook Air M3', time: '2 hours ago', icon: Package, color: 'text-blue-600', bg: 'bg-blue-50' },
-              { text: 'Inventory low for: Logitech MX Master', time: '5 hours ago', icon: Clock, color: 'text-amber-600', bg: 'bg-amber-50' },
-              { text: 'New customer registered: Yosef Birhanu', time: 'Yesterday', icon: Users, color: 'text-emerald-600', bg: 'bg-emerald-50' },
-              { text: 'Order #ORD-7825 was returned', time: 'Yesterday', icon: ShoppingBag, color: 'text-red-600', bg: 'bg-red-50' },
+              { text: 'New inventory injected: MacBook Air M3', time: '02h ago', icon: Package, color: 'text-primary' },
+              { text: 'Critical: Stock depleting for MX Master', time: '05h ago', icon: Clock, color: 'text-accent' },
+              { text: 'Entity established: Yosef Birhanu', time: '24h ago', icon: Users, color: 'text-emerald-600' },
+              { text: 'Protocol: Order #ORD-7825 reversal', time: '24h ago', icon: ShoppingBag, color: 'text-red-600' },
             ].map((activity, i) => (
-              <div key={i} className="flex gap-4">
-                <div className={`w-10 h-10 ${activity.bg} ${activity.color} rounded-xl flex items-center justify-center shrink-0`}>
-                  <activity.icon size={20} />
+              <div key={i} className="flex gap-6 group">
+                <div className={`w-12 h-12 bg-bg rounded-xl flex items-center justify-center shrink-0 border border-border group-hover:border-primary transition-colors`}>
+                  <activity.icon size={20} className={activity.color} />
                 </div>
-                <div>
-                  <p className="text-sm font-bold text-blue-900 leading-snug mb-1">{activity.text}</p>
-                  <p className="text-xs text-gray-400 font-medium">{activity.time}</p>
+                <div className="min-w-0">
+                  <p className="text-[11px] font-black text-primary uppercase tracking-tight leading-snug mb-1 truncate">{activity.text}</p>
+                  <p className="text-[9px] text-slate-400 font-black uppercase tracking-widest opacity-60">{activity.time}</p>
                 </div>
               </div>
             ))}
           </div>
-          <button className="w-full mt-10 py-4 border-2 border-blue-900 text-blue-900 rounded-xl font-bold hover:bg-blue-50 transition-all">
-            View All Activity
+          <button className="w-full mt-12 py-5 bg-primary text-white rounded-[1.5rem] font-black text-[10px] uppercase tracking-widest hover:bg-accent hover:text-primary transition-all shadow-lg">
+            View All Telemetry
           </button>
         </div>
       </div>
