@@ -58,25 +58,29 @@ const Products = () => {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="min-h-screen bg-gray-50 pt-12 pb-24"
+      className="min-h-screen bg-bg pt-12 pb-24"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 mb-12">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16">
           <div>
-            <h1 className="text-4xl font-black text-blue-900 mb-2 uppercase tracking-tight">
-              {activeCategory === 'All' ? 'All Products' : activeCategory}
+            <div className="flex items-center gap-2 mb-3">
+              <span className="w-8 h-[2px] bg-accent" />
+              <span className="text-accent font-black text-[10px] uppercase tracking-[0.2em]">Hardware Catalog</span>
+            </div>
+            <h1 className="text-5xl md:text-7xl font-black text-primary mb-4 uppercase tracking-tighter leading-none">
+              {activeCategory === 'All' ? 'Everything' : activeCategory}
             </h1>
-            <p className="text-gray-500 font-medium">
-              Showing {products.length} high-quality items
+            <p className="text-slate-400 font-bold text-xs uppercase tracking-widest">
+              Explore {products.length} Professional Tech Solutions
             </p>
           </div>
           <ProductSearch value={searchQuery} onChange={setSearchQuery} />
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-12">
+        <div className="flex flex-col lg:flex-row gap-16">
           {/* Sidebar Filter */}
-          <aside className="w-full lg:w-72 shrink-0">
+          <aside className="w-full lg:w-80 shrink-0">
             <ProductFilter 
               activeCategory={activeCategory} 
               onCategoryChange={handleCategoryChange} 
@@ -90,7 +94,7 @@ const Products = () => {
                 <Loader size="lg" />
               </div>
             ) : products.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 gap-8">
                 <AnimatePresence mode="popLayout">
                   {products.map((product) => (
                     <ProductCard key={product.id} product={product} />
@@ -98,17 +102,17 @@ const Products = () => {
                 </AnimatePresence>
               </div>
             ) : (
-              <div className="bg-white rounded-3xl p-20 text-center border-2 border-dashed border-gray-200">
-                <div className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-6 text-gray-300">
-                  <Search size={40} />
+              <div className="bg-white rounded-[4rem] p-24 text-center border-2 border-dashed border-border/60">
+                <div className="w-24 h-24 bg-bg rounded-3xl flex items-center justify-center mx-auto mb-8 text-slate-200">
+                  <Search size={48} strokeWidth={2.5} />
                 </div>
-                <h3 className="text-2xl font-bold text-blue-900 mb-2">No products found</h3>
-                <p className="text-gray-500 mb-8">Try adjusting your search or filters to find what you're looking for.</p>
+                <h3 className="text-3xl font-black text-primary mb-3 uppercase tracking-tighter">No items found</h3>
+                <p className="text-slate-400 font-medium mb-10 max-w-sm mx-auto tracking-tight">Try adjusting your search or filters to find what you're looking for.</p>
                 <button 
                   onClick={() => { setSearchQuery(''); handleCategoryChange('All'); }}
-                  className="text-blue-900 font-bold underline"
+                  className="bg-primary text-white px-10 py-4 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-accent hover:text-primary transition-all shadow-lg"
                 >
-                  Clear all filters
+                  Reset Filters
                 </button>
               </div>
             )}

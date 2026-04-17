@@ -9,71 +9,81 @@ const Contact = () => {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="bg-white min-h-screen pb-24"
+      className="bg-bg min-h-screen pb-24"
     >
       {/* Header */}
-      <section className="bg-gray-50 py-24 border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-6xl font-black text-blue-900 mb-6 uppercase tracking-tight">Get in Touch</h1>
-          <p className="text-xl text-gray-500 max-w-2xl mx-auto">
-            Have a question or need technical support? Our team is here to help you.
+      <section className="bg-bg py-32 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-primary/5 rounded-full blur-[120px] translate-x-1/3 -translate-y-1/2" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <div className="flex items-center justify-center gap-3 mb-6">
+            <span className="w-8 h-[2px] bg-accent" />
+            <span className="text-accent font-black text-[10px] uppercase tracking-[0.2em]">Contact Ahadu</span>
+            <span className="w-8 h-[2px] bg-accent" />
+          </div>
+          <h1 className="text-6xl md:text-8xl font-black text-primary mb-8 uppercase tracking-tighter leading-none">Connect with Us</h1>
+          <p className="text-slate-400 font-bold text-xs uppercase tracking-widest max-w-lg mx-auto leading-loose">
+            Expert technical support and professional <br /> sales consultations in the heart of Addis Ababa.
           </p>
         </div>
       </section>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
           {/* Contact Info Cards */}
-          <div className="lg:col-span-1 space-y-6">
-            <div className="bg-blue-900 text-white p-10 rounded-[2.5rem] shadow-xl">
-              <h3 className="text-2xl font-bold mb-8">Contact Information</h3>
-              <div className="space-y-8">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-blue-800 rounded-2xl flex items-center justify-center shrink-0">
-                    <Phone size={24} className="text-amber-500" />
+          <div className="lg:col-span-1 space-y-8">
+            <div className="bg-primary text-white p-12 rounded-[4rem] shadow-ethio relative overflow-hidden group">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl group-hover:bg-accent/20 transition-colors duration-500" />
+              <h3 className="text-2xl font-black mb-12 uppercase tracking-tight">Direct Access</h3>
+              <div className="space-y-10">
+                <div className="flex items-start gap-6">
+                  <div className="w-14 h-14 bg-white/5 backdrop-blur-md rounded-2xl flex items-center justify-center shrink-0 border border-white/10 group-hover:border-accent/30 transition-colors">
+                    <Phone size={24} className="text-accent" />
                   </div>
                   <div>
-                    <p className="text-blue-200 text-xs font-bold uppercase tracking-widest mb-1">Call Us</p>
-                    <p className="text-lg font-bold">+251 905 027 162</p>
-                    <p className="text-lg font-bold">+251 984 249 649</p>
+                    <p className="text-white/40 text-[9px] font-black uppercase tracking-widest mb-1.5 leading-none">Call Support</p>
+                    <p className="text-lg font-black tracking-tight leading-none mb-2">+251 911 234 567</p>
+                    <p className="text-lg font-black tracking-tight leading-none text-accent">+251 116 678 901</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-blue-800 rounded-2xl flex items-center justify-center shrink-0">
-                    <Mail size={24} className="text-amber-500" />
+                <div className="flex items-start gap-6">
+                  <div className="w-14 h-14 bg-white/5 backdrop-blur-md rounded-2xl flex items-center justify-center shrink-0 border border-white/10 group-hover:border-accent/30 transition-colors">
+                    <Mail size={24} className="text-accent" />
                   </div>
                   <div>
-                    <p className="text-blue-200 text-xs font-bold uppercase tracking-widest mb-1">Email Us</p>
-                    <p className="text-lg font-bold">info@ahaducomputer.com</p>
-                    <p className="text-lg font-bold">support@ahaducomputer.com</p>
+                    <p className="text-white/40 text-[9px] font-black uppercase tracking-widest mb-1.5 leading-none">Email Inquiry</p>
+                    <p className="text-lg font-black tracking-tight leading-none mb-2">info@ahadu.com</p>
+                    <p className="text-lg font-black tracking-tight leading-none text-accent">sales@ahadu.com</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-blue-800 rounded-2xl flex items-center justify-center shrink-0">
-                    <MapPin size={24} className="text-amber-500" />
+                <div className="flex items-start gap-6">
+                  <div className="w-14 h-14 bg-white/5 backdrop-blur-md rounded-2xl flex items-center justify-center shrink-0 border border-white/10 group-hover:border-accent/30 transition-colors">
+                    <MapPin size={24} className="text-accent" />
                   </div>
                   <div>
-                    <p className="text-blue-200 text-xs font-bold uppercase tracking-widest mb-1">Visit Us</p>
-                    <p className="text-lg font-bold leading-snug">Bole Road, Mega Building, 3rd Floor, Addis Ababa, Ethiopia</p>
+                    <p className="text-white/40 text-[9px] font-black uppercase tracking-widest mb-1.5 leading-none">Main Office</p>
+                    <p className="text-lg font-black tracking-tight leading-snug">Bole Road, Mega Building, <br /> 3rd Floor, Addis Ababa</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white p-10 rounded-[2.5rem] border border-gray-100 shadow-lg">
-              <h3 className="text-xl font-bold text-blue-900 mb-6">Business Hours</h3>
-              <div className="space-y-4">
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-500 font-medium">Monday - Friday</span>
-                  <span className="text-blue-900 font-bold">8:30 AM - 6:30 PM</span>
+            <div className="bg-white p-12 rounded-[3.5rem] border border-border shadow-sm">
+              <h3 className="text-[10px] font-black text-slate-400 mb-8 uppercase tracking-[0.2em] ml-1">Trade Hours</h3>
+              <div className="space-y-6">
+                <div className="flex justify-between items-center group">
+                  <span className="text-primary font-black text-xs uppercase tracking-widest">Mon — Fri</span>
+                  <div className="h-[1px] flex-1 mx-4 bg-border/40" />
+                  <span className="text-primary font-black text-xs tracking-tight">08:30 — 18:30</span>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-500 font-medium">Saturday</span>
-                  <span className="text-blue-900 font-bold">9:00 AM - 5:00 PM</span>
+                <div className="flex justify-between items-center group">
+                  <span className="text-primary font-black text-xs uppercase tracking-widest">Saturday</span>
+                  <div className="h-[1px] flex-1 mx-4 bg-border/40" />
+                  <span className="text-primary font-black text-xs tracking-tight">09:00 — 17:00</span>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-500 font-medium">Sunday</span>
-                  <span className="text-amber-600 font-bold uppercase text-xs tracking-widest">Closed</span>
+                <div className="flex justify-between items-center group">
+                  <span className="text-primary font-black text-xs uppercase tracking-widest">Sunday</span>
+                  <div className="h-[1px] flex-1 mx-4 bg-border/40" />
+                  <span className="text-accent font-black text-xs uppercase tracking-widest">Closed</span>
                 </div>
               </div>
             </div>
@@ -81,27 +91,28 @@ const Contact = () => {
 
           {/* Contact Form */}
           <div className="lg:col-span-2">
-            <div className="bg-white p-10 md:p-16 rounded-[3rem] border border-gray-100 shadow-2xl">
-              <h2 className="text-3xl font-black text-blue-900 mb-8 uppercase tracking-tight">Send us a Message</h2>
-              <form className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <Input label="Full Name" placeholder="John Doe" />
-                  <Input label="Email Address" type="email" placeholder="john@example.com" />
+            <div className="bg-white p-12 md:p-20 rounded-[4rem] border border-border shadow-ethio overflow-hidden relative">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-accent/5 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2" />
+              <h2 className="text-4xl font-black text-primary mb-12 uppercase tracking-tighter leading-none relative z-10">Send a Brief</h2>
+              <form className="space-y-10 relative z-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <Input label="Identity" placeholder="Full Name" />
+                  <Input label="Coordinates" type="email" placeholder="Email Address" />
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <Input label="Phone Number" placeholder="+251 9..." />
-                  <Input label="Subject" placeholder="Inquiry about..." />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <Input label="Direct Line" placeholder="Phone Number" />
+                  <Input label="Purpose" placeholder="Subject of Inquiry" />
                 </div>
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-sm font-semibold text-gray-700 ml-1">Message</label>
+                <div className="flex flex-col gap-2">
+                  <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] ml-2">Message Content</label>
                   <textarea 
-                    rows="5" 
-                    placeholder="How can we help you?"
-                    className="px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-blue-900 outline-none transition-all resize-none"
+                    rows="6" 
+                    placeholder="Describe your technical needs..."
+                    className="w-full bg-bg border-2 border-transparent px-8 py-6 rounded-[2rem] text-primary font-bold placeholder:text-slate-300 focus:outline-none focus:border-primary focus:bg-white transition-all resize-none shadow-sm"
                   ></textarea>
                 </div>
-                <Button className="w-full py-5 text-lg">
-                  <Send size={20} /> Send Message
+                <Button variant="primary" size="lg" className="w-full mt-6 shadow-xl group">
+                  Send Transmission <Send size={20} className="group-hover:translate-x-1 transition-transform" />
                 </Button>
               </form>
             </div>
@@ -110,18 +121,22 @@ const Contact = () => {
       </div>
 
       {/* Map Placeholder */}
-      <section className="mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="w-full h-96 bg-gray-100 rounded-[3rem] overflow-hidden relative border border-gray-200">
-          <div className="absolute inset-0 flex items-center justify-center flex-col gap-4">
-            <MapPin size={48} className="text-blue-900 animate-bounce" />
-            <p className="text-gray-500 font-bold uppercase tracking-[0.2em]">Interactive Map Coming Soon</p>
+      <section className="mt-32 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full h-[500px] bg-white rounded-[5rem] overflow-hidden relative border-4 border-white shadow-ethio group">
+          <div className="absolute inset-0 bg-primary/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10 flex flex-col items-center justify-center p-12 text-center">
+            <div className="w-24 h-24 bg-white rounded-[2rem] flex items-center justify-center text-primary mb-6 shadow-2xl rotate-12 group-hover:rotate-0 transition-transform duration-700">
+              <MapPin size={48} className="animate-bounce" />
+            </div>
+            <h3 className="text-4xl font-black text-white mb-4 uppercase tracking-tighter">Bole, Addis Ababa</h3>
+            <p className="text-white/80 font-bold uppercase tracking-widest text-xs">Mega Building, 3rd Floor</p>
           </div>
           <img 
-            src="https://picsum.photos/seed/addis-map/1200/400?grayscale" 
+            src="https://picsum.photos/seed/addis-map/1200/800?grayscale" 
             alt="Map" 
-            className="w-full h-full object-cover opacity-30"
+            className="w-full h-full object-cover grayscale opacity-40 group-hover:scale-110 group-hover:opacity-20 transition-all duration-1000"
             referrerPolicy="no-referrer"
           />
+          <div className="absolute inset-0 border-[20px] border-white pointer-events-none z-20 rounded-[5rem]" />
         </div>
       </section>
     </motion.div>

@@ -64,7 +64,7 @@ const Register = () => {
             <div className="text-center mb-12">
               <Link to="/" className="inline-flex items-center gap-3 mb-10 group">
                 <div className="bg-primary p-2.5 rounded-2xl group-hover:rotate-6 transition-transform shadow-lg">
-                  <img src="/src/assets/icon.svg" alt="Ahadu Icon" className="h-6 w-6 invert" />
+                  <img src="/src/assets/logo.svg" alt="Ahadu Icon" className="h-6 w-6 invert" />
                 </div>
                 <div className="flex flex-col text-left">
                   <span className="text-primary font-black text-xl leading-none tracking-tighter">AHADU</span>
