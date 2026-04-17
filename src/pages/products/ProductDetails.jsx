@@ -122,17 +122,19 @@ const ProductDetails = () => {
             </div>
 
             {/* Specs */}
-            <div className="bg-white rounded-[3rem] p-10 mb-12 border border-border shadow-sm">
-              <h3 className="text-[10px] font-black text-slate-400 mb-8 uppercase tracking-[0.2em] ml-1">Technical Specifications</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                {Object.entries(product.specs).map(([key, value]) => (
-                  <div key={key} className="flex flex-col group">
-                    <span className="text-[9px] text-slate-400 font-extrabold uppercase tracking-widest mb-1 group-hover:text-accent transition-colors">{key}</span>
-                    <span className="text-primary font-black uppercase tracking-tight text-sm">{value}</span>
-                  </div>
-                ))}
+            {product.specs && Object.keys(product.specs).length > 0 && (
+              <div className="bg-white rounded-[3rem] p-10 mb-12 border border-border shadow-sm">
+                <h3 className="text-[10px] font-black text-slate-400 mb-8 uppercase tracking-[0.2em] ml-1">Technical Specifications</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                  {Object.entries(product.specs).map(([key, value]) => (
+                    <div key={key} className="flex flex-col group">
+                      <span className="text-[9px] text-slate-400 font-extrabold uppercase tracking-widest mb-1 group-hover:text-accent transition-colors">{key}</span>
+                      <span className="text-primary font-black uppercase tracking-tight text-sm">{value}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Actions */}
             <div className="flex flex-col sm:flex-row gap-6 mb-12">
